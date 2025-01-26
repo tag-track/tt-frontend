@@ -1,5 +1,4 @@
 import {ReactNode, useState} from "react";
-import {useMediaQuery} from "~/hooks/use_media_query";
 import {
   Drawer,
   DrawerContent,
@@ -16,6 +15,7 @@ import {
   DialogTitle,
   DialogTrigger
 } from "~/components/ui/dialog";
+import {useIsMobile} from "~/hooks/use-mobile";
 
 
 
@@ -36,7 +36,7 @@ export function ResponsiveDialog(
 ){
 
   const [open, setOpen] = useState<boolean>(false)
-  const isDesktop = useMediaQuery("(min-width: 768px)")
+  const isDesktop = !useIsMobile()
 
   if (isDesktop) {
     return (

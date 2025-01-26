@@ -1,7 +1,8 @@
-import {Carousel, CarouselApi, CarouselContent} from "~/components/ui/carousel";
+import {Carousel, CarouselApi, CarouselContent, CarouselNext, CarouselPrevious} from "~/components/ui/carousel";
 import {useEffect, useState} from "react";
 import {range} from "~/utils/range";
 import {ArchiveX} from "lucide-react";
+import {useIsMobile} from "~/hooks/use-mobile";
 
 
 export function ImageCarousel(
@@ -15,6 +16,8 @@ export function ImageCarousel(
   const [api, setApi] = useState<CarouselApi>()
   const [current, setCurrent] = useState(0)
 
+  const isMobile = useIsMobile()
+
   useEffect(()=>{
     if(!api){
       return
@@ -27,13 +30,8 @@ export function ImageCarousel(
 
   }, [api])
 
-  useEffect(() => {
-    console.log(current)
-  }, [current]);
-
-
   return(
-    <Carousel className={`rounded overflow-hidden aspect-square relative`} setApi={setApi}>
+    <Carousel className={`rounded overflow-hidden aspect-square relative group`} setApi={setApi}>
       <CarouselContent>
         {images.map(i => {
           return(
@@ -80,6 +78,19 @@ export function ImageCarousel(
           }
         </div>
       </div>
+      {
+        !isMobile&&images.length>1&&
+        <>
+          <CarouselPrevious className={`
+          absolute left-3
+          transition-opacity
+          `}/>
+          <CarouselNext className={`
+          absolute right-3
+          transition-opacity
+          `}/>
+        </>
+      }
     </Carousel>
   )
 }

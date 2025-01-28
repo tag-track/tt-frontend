@@ -24,8 +24,7 @@ export default function Index() {
 
   return (
     <div className={`
-    mx-2
-    pt-12 pb-6
+    pt-12 pb-6 w-full
     `}>
       <div className={`
       flex flex-col justify-start items-center
